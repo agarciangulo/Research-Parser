@@ -169,7 +169,7 @@ Expected: Clean first commit with all scaffolding.
 
 This is the foundation. If we can't reliably get papers, nothing else matters.
 
-### 1.0 arXiv API Investigation Spike
+### 1.0 arXiv API Investigation
 
 **⚠️ Do this first, before writing any production code.**
 
@@ -1066,7 +1066,7 @@ Expected: All tests pass. No warnings.
 | Phase | Test Type | Real API Calls? | Purpose |
 |-------|-----------|-----------------|---------|
 | 0 | Import & config checks | No | Verify setup |
-| 1 | **arXiv API spike** + live test + unit tests | Yes (arXiv only) | Validate data source, verify collection works |
+| 1 | **arXiv API investigation** + live test + unit tests | Yes (arXiv only) | Validate data source, verify collection works |
 | 2 | Live PDF download + unit tests | Yes (arXiv only) | Verify extraction works |
 | 3 | **Live ranking** + unit tests | **Yes (Claude)** — cached papers | Verify ranking quality |
 | 4 | **Live analysis** + unit tests | **Yes (Claude)** — cached rankings | Verify summary quality |

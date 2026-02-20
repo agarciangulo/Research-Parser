@@ -162,12 +162,8 @@ class TestRankPapers:
         mock_response.content = [
             mocker.MagicMock(text=json.dumps(VALID_RANKING_RESPONSE))
         ]
-        mock_response.usage.input_tokens = 50000
-        mock_response.usage.output_tokens = 1500
 
-        mock_client = mocker.MagicMock()
-        mock_client.messages.create.return_value = mock_response
-        mocker.patch("src.ranker.anthropic.Anthropic", return_value=mock_client)
+        mock_call = mocker.patch("src.ranker.call_claude", return_value=mock_response)
 
         from src.ranker import rank_papers
 
@@ -175,24 +171,20 @@ class TestRankPapers:
         result = rank_papers(papers)
 
         assert len(result["top_papers"]) == 10
-        mock_client.messages.create.assert_called_once()
+        mock_call.assert_called_once()
 
     def test_retries_on_malformed_json(self, mocker):
         good_response = mocker.MagicMock()
         good_response.content = [
             mocker.MagicMock(text=json.dumps(VALID_RANKING_RESPONSE))
         ]
-        good_response.usage.input_tokens = 50000
-        good_response.usage.output_tokens = 1500
 
         bad_response = mocker.MagicMock()
         bad_response.content = [mocker.MagicMock(text="not valid json")]
-        bad_response.usage.input_tokens = 50000
-        bad_response.usage.output_tokens = 100
 
-        mock_client = mocker.MagicMock()
-        mock_client.messages.create.side_effect = [bad_response, good_response]
-        mocker.patch("src.ranker.anthropic.Anthropic", return_value=mock_client)
+        mock_call = mocker.patch(
+            "src.ranker.call_claude", side_effect=[bad_response, good_response]
+        )
 
         from src.ranker import rank_papers
 
@@ -200,17 +192,13 @@ class TestRankPapers:
         result = rank_papers(papers)
 
         assert len(result["top_papers"]) == 10
-        assert mock_client.messages.create.call_count == 2
+        assert mock_call.call_count == 2
 
     def test_raises_after_two_failures(self, mocker):
         bad_response = mocker.MagicMock()
         bad_response.content = [mocker.MagicMock(text="garbage")]
-        bad_response.usage.input_tokens = 50000
-        bad_response.usage.output_tokens = 100
 
-        mock_client = mocker.MagicMock()
-        mock_client.messages.create.return_value = bad_response
-        mocker.patch("src.ranker.anthropic.Anthropic", return_value=mock_client)
+        mock_call = mocker.patch("src.ranker.call_claude", return_value=bad_response)
 
         from src.ranker import rank_papers
 
@@ -218,4 +206,4 @@ class TestRankPapers:
         with pytest.raises(RuntimeError, match="Failed to get valid ranking"):
             rank_papers(papers)
 
-        assert mock_client.messages.create.call_count == 2
+        assert mock_call.call_count == 2

@@ -4,18 +4,13 @@ import json
 from datetime import date
 from pathlib import Path
 
-import anthropic
-from dotenv import load_dotenv
-
 from src.collector import Paper
+from src.llm import call_claude
 from src.logger import setup_logger
-
-load_dotenv()
 
 log = setup_logger("ranker")
 
 CONFIG_DIR = Path(__file__).resolve().parent.parent / "config"
-MODEL = "claude-sonnet-4-20250514"
 TEMPERATURE = 0.3
 MAX_OUTPUT_TOKENS = 4096
 
@@ -192,26 +187,20 @@ def rank_papers(papers: list[Paper]) -> dict:
         f"(~{len(user_prompt) // 4:,} input tokens estimated)"
     )
 
-    client = anthropic.Anthropic()
     last_error = None
 
     for attempt in range(2):
         if attempt > 0:
             log.warning(f"Retry attempt {attempt + 1} due to: {last_error}")
 
-        response = client.messages.create(
-            model=MODEL,
-            max_tokens=MAX_OUTPUT_TOKENS,
-            temperature=TEMPERATURE,
+        response = call_claude(
             system=system_prompt,
-            messages=[{"role": "user", "content": user_prompt}],
+            user_prompt=user_prompt,
+            temperature=TEMPERATURE,
+            max_tokens=MAX_OUTPUT_TOKENS,
         )
 
         raw_text = response.content[0].text
-        log.info(
-            f"LLM response: {response.usage.input_tokens:,} input tokens, "
-            f"{response.usage.output_tokens:,} output tokens"
-        )
 
         try:
             result = _parse_ranking_response(raw_text)

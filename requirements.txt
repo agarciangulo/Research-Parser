@@ -13,6 +13,7 @@ anthropic>=0.40.0
 
 # Core — Email templating
 Jinja2>=3.1.0
+Markdown>=3.5.0
 
 # Config — Environment variable loading
 python-dotenv>=1.0.0

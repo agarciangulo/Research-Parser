@@ -1,0 +1,25 @@
+# Core — arXiv data collection
+arxiv>=2.1.0
+
+# Core — PDF text extraction
+PyMuPDF>=1.24.0
+
+# Core — HTML fallback parsing
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# Core — LLM integration
+anthropic>=0.40.0
+
+# Core — Email templating
+Jinja2>=3.1.0
+
+# Config — Environment variable loading
+python-dotenv>=1.0.0
+
+# Dev — Testing
+pytest>=8.0.0
+pytest-mock>=3.14.0
+
+# Dev — Linting & formatting
+ruff>=0.8.0

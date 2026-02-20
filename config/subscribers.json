@@ -1,0 +1,9 @@
+{
+  "subscribers": [
+    {
+      "email": "REPLACE_WITH_YOUR_EMAIL",
+      "name": "Andres",
+      "active": true
+    }
+  ]
+}

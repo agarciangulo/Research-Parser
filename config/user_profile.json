@@ -1,0 +1,62 @@
+{
+  "profile_name": "Andres — AI Research Digest",
+  "role_context": "Technology professional interested in staying current with AI research, especially as it applies to real-world products, business problems, and the evolving competitive landscape of AI.",
+  "primary_interests": [
+    "LLM agents and agentic architectures",
+    "AI-hardware co-design and integration (custom silicon, neuromorphic computing, on-device AI, AI accelerators)",
+    "Proprietary and unique dataset strategies as competitive moats",
+    "AI applied to business processes and productivity",
+    "Multi-agent systems and coordination",
+    "AI reasoning and chain-of-thought improvements"
+  ],
+  "secondary_interests": [
+    "Retrieval-Augmented Generation (RAG)",
+    "AI safety and alignment",
+    "Novel training techniques and fine-tuning methods",
+    "AI benchmarks and evaluation methodologies",
+    "Knowledge graphs and structured knowledge"
+  ],
+  "wildcard_interest": "Any paper that proposes a genuinely novel paradigm, unconventional approach, or potential breakthrough — even if it falls outside the listed interests. Flag these with a note explaining why they're worth attention despite not matching the profile.",
+  "deprioritize": [
+    "Pure computer vision with no AI/LLM connection",
+    "Narrow medical/biology AI applications",
+    "Non-English language-specific NLP",
+    "Incremental benchmark improvements without methodological novelty"
+  ],
+  "prioritized_sources": {
+    "industry_labs": [
+      "OpenAI",
+      "Google DeepMind",
+      "Anthropic",
+      "Meta AI (FAIR)",
+      "Microsoft Research",
+      "NVIDIA Research",
+      "Mistral AI",
+      "xAI"
+    ],
+    "universities": [
+      "MIT",
+      "Stanford",
+      "Harvard",
+      "Carnegie Mellon (CMU)",
+      "UC Berkeley",
+      "Princeton",
+      "Caltech",
+      "University of Toronto",
+      "Tsinghua University"
+    ],
+    "research_organizations": [
+      "Allen Institute for AI (AI2)",
+      "MILA",
+      "EleutherAI"
+    ],
+    "usage_note": "Papers from these sources get a ranking boost, but a brilliant paper from an unknown lab should still surface. Source is a tiebreaker, not a gatekeeper."
+  },
+  "preference_signals": {
+    "favor_accepted_venues": true,
+    "venues_of_interest": ["ICLR", "NeurIPS", "ICML", "AAAI", "ACL", "EMNLP"],
+    "favor_practical_applications": true,
+    "favor_novel_methods_over_incremental": true,
+    "accessibility_preference": "Prefer papers that introduce concepts clearly, even if technically deep"
+  }
+}

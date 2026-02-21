@@ -4,6 +4,16 @@
       "email": "andres.garcia.angulo@gmail.com",
       "name": "Andres",
       "active": true
+    },
+    {
+      "email": "laurenbenjamin084@gmail.com",
+      "name": "Lauren",
+      "active": true
+    },
+    {
+      "email": "daniel.garcia@mpivpartners.com",
+      "name": "Daniel",
+      "active": true
     }
   ]
 }
